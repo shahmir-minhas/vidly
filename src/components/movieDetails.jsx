@@ -1,11 +1,15 @@
 import React, { Component } from "react";
+// import { useParams } from "react";
+
 
 class MovieDetails extends React.Component {
     handleSave = () => {
         console.log("save");
         this.props.history.replace("/movies");
     }
-  render() {
+    render() {
+    //   const {id} = useParams();
+    //used in functional components 
       
     return (
       <div>

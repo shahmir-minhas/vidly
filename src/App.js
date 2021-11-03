@@ -1,13 +1,13 @@
 // import logo from './logo.svg';
 import { Component } from "react";
-import "./App.css";
+import { Route, Switch, Redirect} from "react-router-dom";
 import Movies from "./components/movies";
 import NavBar from "./components/common/navbar";
-import { Route, Switch, Redirect} from "react-router-dom";
 import Rental from "./components/rentals";
 import Customer from "./components/customers";
 import MovieDetails from "./components/movieDetails";
 import NotFound from "./components/not-found";
+import "./App.css";
 
 function App() {
   return (
@@ -73,3 +73,5 @@ export default App;
 //  <Redirect to="/not-found" component="notfoundcomponent"/>
 
 // <Redirect from="/messages" to="/posts"/> 
+
+//clxx lib
