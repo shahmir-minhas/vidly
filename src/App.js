@@ -8,6 +8,7 @@ import Customer from "./components/customers";
 import MovieDetails from "./components/movieDetails";
 import NotFound from "./components/not-found";
 import LoginFrom from "./components/loginForm";
+import Axios from './components/axios';
 import "./App.css";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" component={LoginFrom}/>
           <Route path="/movies/:id" component={MovieDetails}/>
           <Route path="/movies" component={Movies}/>
+          <Route path="/axios" component={Axios}/>
           <Route path="/rental" component={Rental}/>
           <Route path="/customer" component={Customer}/>
           <Route path="/not-found" component={NotFound}/>

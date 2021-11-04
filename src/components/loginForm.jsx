@@ -5,35 +5,35 @@ import Input from "./common/input";
 class LoginFrom extends React.Component {
   state = {
     account: { username: "", password: "" },
-    errors : {
-        username: '',
-        password: '',
-    }
+    errors: {
+      username: "",
+      password: "",
+    },
   };
 
   //createing a reaferance for input and use ref={this.username}
   // <input ref={this.username} id="username" type="text" className="form-control" />
-//   username = React.createRef();
+  //   username = React.createRef();
 
-  validate = () =>{
+  validate = () => {
     const errors = {};
-    const {account} = this.state;
-    if(account.username.trim() === '')
-    errors.username = 'Username is required';
-    if(account.password.trim() === '')
-    errors.password = 'Password is required';
+    const { account } = this.state;
+    if (account.username.trim() === "")
+      errors.username = "Username is required";
+    if (account.password.trim() === "")
+      errors.password = "Password is required";
 
     console.log(errors);
     return Object.keys(errors).length === 0 ? null : errors;
-  }
+  };
 
   handleSubmit = (e) => {
     //prevent the form to submit on server and relaod whole page
     e.preventDefault();
-    //validation 
+    //validation
     const errors = this.validate();
-    this.setState({errors: errors || {} });
-    if(errors) return;
+    this.setState({ errors: errors || {} });
+    if (errors) return;
     //old way
     // const username = document.getElementById("username").value();
     //new way to avoid DOM and use react
@@ -43,23 +43,22 @@ class LoginFrom extends React.Component {
     console.log("form submitted");
   };
 
-  validateInput = ({name, value}) =>{
-    if(name === 'username'){
-        if(value.trim() === '') return 'User Name is Required';
+  validateInput = ({ name, value }) => {
+    if (name === "username") {
+      if (value.trim() === "") return "User Name is Required";
     }
-    if(name === 'password'){
-        if(value.trim() === '') return 'Password is Required';
+    if (name === "password") {
+      if (value.trim() === "") return "Password is Required";
     }
   };
 
-  handleChange = ({currentTarget: input}) => {
-      const errors = {...this.state.errors};
-      const errorMessage = this.validateInput(input);
-      if(errorMessage) errors[input.name] = errorMessage;
-      else delete errors[input.name];
-      console.log(errors);
-      this.setState({errors});
-
+  handleChange = ({ currentTarget: input }) => {
+    const errors = { ...this.state.errors };
+    const errorMessage = this.validateInput(input);
+    if (errorMessage) errors[input.name] = errorMessage;
+    else delete errors[input.name];
+    console.log(errors);
+    this.setState({ errors });
 
     const account = { ...this.state.account };
 
@@ -80,10 +79,23 @@ class LoginFrom extends React.Component {
         <h1 className="my-5">Login</h1>
 
         <form onSubmit={this.handleSubmit}>
+          <Input
+            name="username"
+            label="User Name"
+            value={account.username}
+            type="text"
+            onChange={this.handleChange}
+            error={errors.username}
+          />
 
-            <Input name="username" label="User Name" value={account.username} type="text" onChange={this.handleChange} error={errors.username}/>
-            
-            <Input name="password" label="Password" value={account.password} type="password" onChange={this.handleChange} error={errors.password} />
+          <Input
+            name="password"
+            label="Password"
+            value={account.password}
+            type="password"
+            onChange={this.handleChange}
+            error={errors.password}
+          />
 
           {/* <div className="form-group">
             <label htmlFor="username">User Name</label>
@@ -98,7 +110,9 @@ class LoginFrom extends React.Component {
             />
           </div> */}
 
-          <button className="btn btn-primary">Login</button>
+          <button disabled={this.validate()} className="btn btn-primary">
+            Login
+          </button>
         </form>
       </div>
     );
@@ -114,6 +128,5 @@ export default LoginFrom;
 
 //working dynamically with property we use bracket notation [] instead of dot . notation
 //e.g this.accoount.username to this.account['username']
-
 
 //null and undefined can't be passed in controlled input

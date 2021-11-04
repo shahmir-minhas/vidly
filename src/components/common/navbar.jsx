@@ -32,6 +32,11 @@ const NavBar = () => {
               Login
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink className="nav-link " to="/axios">
+              Axios
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </React.Fragment>
