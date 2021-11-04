@@ -27,6 +27,11 @@ const NavBar = () => {
               Rental
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink className="nav-link " to="/login">
+              Login
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </React.Fragment>
@@ -40,6 +45,6 @@ export default NavBar;
 //to avoid that link is used and href="" is changed with to=""
 
 //when link having an id as well
-/* <Link className="nav-link active" to="/like/${id}">
+/* <Link className="nav-link active" to=`/like/${id}`>
               Like 
             </Link> */
