@@ -23,7 +23,7 @@ class LoginFrom extends React.Component {
     if (account.password.trim() === "")
       errors.password = "Password is required";
 
-    console.log(errors);
+    // console.log(errors);
     return Object.keys(errors).length === 0 ? null : errors;
   };
 
@@ -34,6 +34,7 @@ class LoginFrom extends React.Component {
     const errors = this.validate();
     this.setState({ errors: errors || {} });
     if (errors) return;
+
     //old way
     // const username = document.getElementById("username").value();
     //new way to avoid DOM and use react
@@ -57,7 +58,7 @@ class LoginFrom extends React.Component {
     const errorMessage = this.validateInput(input);
     if (errorMessage) errors[input.name] = errorMessage;
     else delete errors[input.name];
-    console.log(errors);
+    // console.log(errors);
     this.setState({ errors });
 
     const account = { ...this.state.account };
@@ -130,3 +131,26 @@ export default LoginFrom;
 //e.g this.accoount.username to this.account['username']
 
 //null and undefined can't be passed in controlled input
+
+//Auth using session storage
+// const token = { user: "user", pasd: 123 };
+// //Store Token
+// sessionStorage.setItem("token", JSON.stringify(token)); //to create a token in sessionStorage
+// //To get token
+// const tokenString = sessionStorage.getItem("token");
+// console.log(tokenString);
+// const userToken = JSON.parse(tokenString);
+// console.log(userToken);
+// console.log(userToken.user);
+
+//Auth using local storage
+// const token = { user: "user", pasd: 123 };
+// //Store Token
+// sessionStorage.setItem("token", JSON.stringify(token)); //to create a token in sessionStorage
+// //To get token
+// const tokenString = sessionStorage.getItem("token");
+// console.log(tokenString);
+// const userToken = JSON.parse(tokenString);
+// console.log(userToken);
+// console.log(userToken.user);
+

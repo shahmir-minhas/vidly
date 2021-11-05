@@ -1,0 +1,30 @@
+$myFont: Helvetica, sans-serif;
+$myColor: white;
+$myFontSize: 18px;
+$myWidth: 100%;
+$border-radius: 10px;
+
+
+.button-scss{
+    background-color: grey;
+    padding: 10px 20px;
+    width: $myWidth;
+    color: $myColor;
+    border-radius: $border-radius;
+    border: none;
+
+    font: {
+        family: Helvetica, sans-serif;
+        size: 18px;
+        weight: bold;
+      }
+    
+    
+}
+
+
+
+
+
+
+// need vs scss compiler 

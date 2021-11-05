@@ -37,6 +37,11 @@ const NavBar = () => {
               Axios
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink className="nav-link " to="/contextapi">
+              Context Api
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </React.Fragment>

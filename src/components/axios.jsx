@@ -1,19 +1,10 @@
 import React, { Component } from "react";
-import axios from "axios";
+import httpServices from "../services/httpServices";
+import config from "../config.json";
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {toast} from 'react-toastify';
 
-axios.interceptors.response.use(null, (error) => {
-  const expectedError =
-    error.response &&
-    error.response.state >= 400 &&
-    error.response.status < 500;
-
-  if (!expectedError) {
-    console.log("logging the error");
-    alert("unexpected error happens");
-  }
-});
-
-const apiEndpoint = "https://jsonplaceholder.typicode.com/posts";
 
 class App extends React.Component {
   state = {
@@ -24,38 +15,44 @@ class App extends React.Component {
     //async promise > resolved (success) || rejected(fail)
     // const promise = axios.get('https://jsonplaceholder.typicode.com/posts');
     // console.log(promise);
-    const { data: posts } = await axios.get(apiEndpoint);
-    console.log(posts);
+    // const { data: posts } = await axios.get(apiEndpoint);
+    const { data: posts } = await httpServices.get(config.apiEndpoint);
+    
     this.setState({ posts });
   }
 
   handleAdd = async () => {
     console.log("add");
     const obj = {
-      title: "a",
+      title: "Movie: Dark Errors",
       body: "b",
     };
 
-    const { data: post } = await axios.post(apiEndpoint, obj);
+    const { data: post } = await httpServices.post(config.apiEndpoint, obj);
     const posts = [post, ...this.state.posts];
 
     this.setState({ posts });
-    console.log(this.state.posts);
+    toast.success(obj.title + " is added");
+    
   };
+
   //pessimistic Updates
   handleUpdate = async (post) => {
-    post.title = "update";
-    //one or more properties
-    // axios.patch(apiEndpoint+'/'+post.id), post.id, {title: post.title};
-    //all properties
-    await axios.put(apiEndpoint + "/" + post.id, post);
+console.log(post);
+    // const origianlPosts = [...this.state.posts];
+    // post.title = "update";
+    // //one or more properties
+    // // axios.patch(apiEndpoint+'/'+post.id), post.id, {title: post.title};
+    // //all properties
+    // await httpServices.put(config.apiEndpoint + "/" + post.id, post);
 
     const posts = [...this.state.posts];
     const index = posts.indexOf(post);
+    post.title = "update";
     console.log(index);
-    console.log(post);
     posts[index] = { ...post };
     this.setState({ posts });
+    toast("Title Updated");
   };
 
   handleEdit = () => {
@@ -68,7 +65,9 @@ class App extends React.Component {
     const posts = this.state.posts.filter((p) => p.id !== post.id);
     this.setState({ posts });
     try {
-      await axios.delete(apiEndpoint + "/" + post.id);
+      await httpServices.delete(config.apiEndpoint + "/" + post.id);
+      toast.error(" Deleted");
+      
       // throw new Error("error i am here"); simulate error for visual example that after deleting post will be back
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
@@ -79,6 +78,7 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
+      
         <div className="container mt-5">
           <button
             className="btn btn-primary btn-sm my-2"
@@ -96,7 +96,7 @@ class App extends React.Component {
             </thead>
             <tbody>
               {this.state.posts.map((p) => (
-                <tr>
+                <tr key={p.id}>
                   <td>{p.title}</td>
                   <td>
                     <button
@@ -119,6 +119,7 @@ class App extends React.Component {
             </tbody>
           </table>
         </div>
+        <ToastContainer/>
       </React.Fragment>
     );
   }

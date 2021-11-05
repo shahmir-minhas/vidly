@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-
+import './customer.scss';
 
 const Customer = (porps) => {
     return ( 
-        <div>
+        <React.Fragment>
             <h1>Customer</h1>
-        </div>
+            <button className="button-scss">Hellow</button>
+        </React.Fragment>
      );
 }
  

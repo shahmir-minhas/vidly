@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import { Component } from "react";
-import { Route, Switch, Redirect} from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Movies from "./components/movies";
 import NavBar from "./components/common/navbar";
 import Rental from "./components/rentals";
@@ -8,7 +8,8 @@ import Customer from "./components/customers";
 import MovieDetails from "./components/movieDetails";
 import NotFound from "./components/not-found";
 import LoginFrom from "./components/loginForm";
-import Axios from './components/axios';
+import Axios from "./components/axios";
+import Parent from './components/ContextAPi/parent';
 import "./App.css";
 
 function App() {
@@ -17,15 +18,16 @@ function App() {
       <NavBar />
       <main className="container">
         <Switch>
-        <Route path="/login" component={LoginFrom}/>
-          <Route path="/movies/:id" component={MovieDetails}/>
-          <Route path="/movies" component={Movies}/>
-          <Route path="/axios" component={Axios}/>
-          <Route path="/rental" component={Rental}/>
-          <Route path="/customer" component={Customer}/>
-          <Route path="/not-found" component={NotFound}/>
-          <Redirect exact from="/" to="/movies"/>
-          <Redirect to="/not-found"/>
+          <Route path="/login" component={LoginFrom} />
+          <Route path="/movies/:id" component={MovieDetails} />
+          <Route path="/movies" component={Movies} />
+          <Route path="/axios" component={Axios} />
+          <Route path="/contextapi" component={Parent} />
+          <Route path="/rental" component={Rental} />
+          <Route path="/customer" component={Customer} />
+          <Route path="/not-found" component={NotFound} />
+          <Redirect exact from="/" to="/movies" />
+          <Redirect to="/not-found" />
         </Switch>
       </main>
     </div>
@@ -44,26 +46,22 @@ export default App;
   <Route path="/" component={Movies} />
 </switch>; */
 
-//if you want to send props to route component 
+//if you want to send props to route component
 //use render insted of component than arrow function and your component
 
-//now to pass standard props as well we have to pass props as arg in arrow function 
-//and than use spred operator to send standard props 
+//now to pass standard props as well we have to pass props as arg in arrow function
+//and than use spred operator to send standard props
 
 //to send params form url use :param for multiple params use /:param/:param/:param
 
 //generally optional parameters are avoided
-//use query string which is in search property 
+//use query string which is in search property
 //and to read this query string install npm i query-string to parse the query string
 
 //to redirect form a page when user submits a form etc
 // handleSubmit = ()=> { this.props.history.push("/otherPage"); };
 // handleSubmit = ()=> { this.props.history.replce("/otherPage"); };
 //developers use replace() more often
-
-
-
-
 
 //   <Route path="/like" component={Like} />
 //   <Route path="/like" render={(props)=><Like sentProp="iWasSend" {...props}/>} />
@@ -72,10 +70,23 @@ export default App;
 //  <Route path="/products/:id" component="componentName"/>
 //   <Route path="/products/:id/:name" component="componentName"/>
 //   <Route path="/products/:id?/:name?" component="componentName"/> for optional params
-  
+
 //  <Route path="/not-found" exact component={NotFound} />
 //  <Redirect to="/not-found" component="notfoundcomponent"/>
 
-// <Redirect from="/messages" to="/posts"/> 
+// <Redirect from="/messages" to="/posts"/>
 
 //clxx lib
+
+//private Route
+/* <Route {...rest} render={props => (
+            isLogin() ?
+                <Component {...props} />
+            : <Redirect to="/signin" />
+        )} /> */
+
+//Publlic Routes
+/* <PublicRoute restricted={false} component={Home} path="/" exact />
+   <PublicRoute restricted={true} component={SignIn} path="/signin" exact />
+   <PrivateRoute component={Dashboard} path="/dashboard" exact />
+           */
