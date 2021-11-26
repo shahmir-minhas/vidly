@@ -1,0 +1,12 @@
+.button-scss {
+  background-color: grey;
+  padding: 10px 20px;
+  width: 100%;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  font-family: Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+}
+/*# sourceMappingURL=customer.css.map */
